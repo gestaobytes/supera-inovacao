@@ -21,6 +21,14 @@ class Users extends Seeder
                     'status' => 1,
                     'created_at' => date('Y-m-d H:i:s')
                 ],
+                [
+                    'uuid' => Str::uuid(),
+                    'fullname' => 'Felipe Costa Macedo',
+                    'email' => 'felipe@gmail.com',
+                    'password' => (new BcryptHasher)->make('123456'),
+                    'status' => 1,
+                    'created_at' => date('Y-m-d H:i:s')
+                ],
             ]);
         } else {
             echo "\e[User não é uma tabela vazia. Não foi efetuado o Seed.";

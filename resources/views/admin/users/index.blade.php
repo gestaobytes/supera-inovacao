@@ -2,50 +2,56 @@
 
 @section('content')
    <div class="container">
-    <div class="block-header">
-      <a class="btn btn-primary waves-effect" href="{{ route('users.create') }}">
-          <i class="material-icons">add</i>
-          <span>Adicionar Nova Categoria</span>
-      </a>
-  </div>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome Completo</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">CPF</th>
-            <th scope="col">Status</th>
-            <th scope="col">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($users as $user)
-            <tr>
-              <td>{{ $user->id }}</td>
-              <td>{{ $user->fullname }}</td>
-              <td>{{ $user->email }}</td>
-              <td>{{ $user->cpf }}</td>
-              <td>{{ $user->status }}</td>
-              <td class="text-center">
-                    <a href="{{ route('users.edit',$user->id) }}" class="btn btn-info waves-effect">
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a href="{{ route('users.show',$user->id) }}" class="btn btn-info waves-effect">
-                        <i class="material-icons">show</i>
-                    </a>
-                    <button class="btn btn-danger waves-effect" type="button" onclick="deleteUser({{ $user->id }})">
-                        <i class="material-icons">delete</i>
-                    </button>
-                    <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy',$user->id) }}" method="POST" style="display: none;">
-                        @csrf
-                        @method('DELETE')
-                    </form>
-                </td>
-            </tr>
-             @endforeach
-        </tbody>
-      </table>
+
+    <h1 class="font-bold mb-3 text-xl">USUARIOS</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="block-header">
+                <a class="btn btn-primary waves-effect" href="{{ route('users.create') }}">
+                    NOVO REGISTRO
+                </a>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Nome Completo</th>
+                    <th>E-mail</th>
+                    <th>Status</th>
+                    <th width="150px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($users as $data)
+                    <tr>
+                      <td>{{ $data->fullname }}</td>
+                      <td>{{ $data->email }}</td>
+                      <td>{{ $data->status }}</td>
+                      <td class="text-right">
+                        <a href="{{ route('users.edit', $data->id) }}"
+                            class="text-sm text-white bg-blue-400 rounded ml-2 p-1 px-2 hover:bg-blue-600">Editar
+                        </a>
+                        <a class="text-sm text-white bg-red-500 rounded ml-2 p-1 px-2 hover:bg-red-600 cursor-pointer"
+                            onclick="deleteUser({{ $data->id }})">
+                            Excluir
+                        </a>
+                        <form id="delete-form-{{ $data->id }}"
+                            action="{{ route('users.destroy', $data->id) }}" method="POST"
+                            style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </td>
+                    </tr>
+                     @endforeach
+                </tbody>
+              </table>
+
+            {{ $users->links() }}
+        </div>
+    </div>
+    
+    
 </div>
 @endsection
 
@@ -64,7 +70,7 @@
           cancelButtonText: 'No, cancel!',
           confirmButtonClass: 'btn btn-success',
           cancelButtonClass: 'btn btn-danger',
-          buttonsStyling: false,
+          buttonsStyling: true,
           reverseButtons: true
       }).then((result) => {
           if (result.value) {

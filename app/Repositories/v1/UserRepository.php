@@ -75,6 +75,11 @@ class UserRepository implements UserInterface
 	public function destroy($id) {
 		$model = $this->model->where('id', $id)->first();
 		// return $model->delete();
+		if($model->id == 1){
+			toastr()->error('Usuário não pode ser excluído!', 'Erro', ["positionClass" => "toast-top-right"]);
+			return redirect()->back();
+		}
+
 		$model->delete();
 		toastr()->success('Usuário excluído com sucesso!', 'Sucesso', ["positionClass" => "toast-top-right"]);
 		return redirect()->back();

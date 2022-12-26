@@ -1,17 +1,18 @@
 @extends('layouts.master')
 
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <div class="container">
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <h1 class="font-bold mb-3 text-xl">EDITAR MANUTENÇÃO</h1>
 
@@ -39,7 +40,7 @@
                         <div class="col-md-6 pb-3">
                             <div class="form-group form-float">
                                 <div class="form-line {{ $errors->has('vehicles') ? 'focused error' : '' }}">
-                                    <label for="vehicle">Selecionar Usuario</label>
+                                    <label value="{{ $data->vehicle }}" for="vehicle">Selecionar Usuario</label>
                                     <select name="vehicle_id" value="{{ $data->vehicle_id }}" id="vehicle"
                                         class="form-select" aria-label="Default select example">
                                         @foreach ($vehicles as $vehicle)
@@ -67,7 +68,7 @@
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <label class="form-label">Servico de Data</label>
-                                    <input type="text" id="dateservice" class="form-control" name="dateservice"
+                                    <input type="date" id="dateservice" class="form-control" name="dateservice"
                                         value="{{ $data->dateservice }}" placeholder="Servico de Data" required>
                                 </div>
                                 @if ($errors->has('dateservice'))
@@ -79,9 +80,9 @@
                         <div class="col-md-6 pb-3">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <label class="form-label">Servico de Data</label>
+                                    <label class="form-label">Valores</label>
                                     <input type="text" id="values" class="form-control" name="values"
-                                        value="{{ $data->values }}" placeholder="Servico de Data" required>
+                                        value="{{ $data->values }}" placeholder="Valores" required>
                                 </div>
                                 @if ($errors->has('values'))
                                     <div class="alert alert-danger">{{ $errors->first('values') }}</div>
@@ -92,9 +93,9 @@
                         <div class="col-md-6 pb-3">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <label class="form-label">Servico de Data</label>
+                                    <label class="form-label">Observações</label>
                                     <input type="text" id="observations" class="form-control" name="observations"
-                                        value="{{ $data->observations }}" placeholder="Servico de Data" required>
+                                        value="{{ $data->observations }}" placeholder="Observações" required>
                                 </div>
                                 @if ($errors->has('observations'))
                                     <div class="alert alert-danger">{{ $errors->first('observations') }}</div>

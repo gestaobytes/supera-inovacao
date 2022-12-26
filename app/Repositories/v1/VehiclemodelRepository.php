@@ -17,14 +17,14 @@ class VehiclemodelRepository implements VehiclemodelInterface
 
 	public function index()
 	{
-        $registers = $this->model->paginate(10);
-        return view('admin.vehiclemodels.index', compact('registers'));
+        $vehiclemodels = $this->model->paginate(10);
+        return view('admin.vehiclemodels.index', compact('vehiclemodels'));
 	}
 
 	public function show($id)
 	{
-		$registers = $this->model->where('id', $id)->first();
-		$this->commons->insertLog($registers->id, 'vehiclemodels', 'R');
+		$vehiclemodels = $this->model->where('id', $id)->first();
+		$this->commons->insertLog($vehiclemodels->id, 'vehiclemodels', 'R');
 		return view('admin.vehiclemodels.show', compact('vehiclemodels'));
 	}
 
@@ -48,7 +48,7 @@ class VehiclemodelRepository implements VehiclemodelInterface
 	}
 
 	public function edit($id) {
-		$registers = $this->model->where('id', $id)->first();
+		$vehiclemodels = $this->model->where('id', $id)->first();
 		return view('admin.vehiclemodels.edit', compact('vehiclemodels'));
 	}
 

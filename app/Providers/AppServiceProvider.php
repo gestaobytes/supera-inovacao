@@ -41,6 +41,11 @@ class AppServiceProvider extends ServiceProvider
             'App\Interfaces\v1\MaintenanceInterface',
             'App\Repositories\v1\MaintenanceRepository'
         );
+
+        $this->app->bind(
+            'App\Interfaces\v1\DashboardInterface',
+            'App\Repositories\v1\DashboardRepository'
+        );
     }
 
     public function boot()

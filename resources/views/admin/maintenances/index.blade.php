@@ -15,6 +15,8 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th width="220px">Usuario</th>
+                            <th width="70px">Placa</th>
                             <th width="70px">KM</th>
                             <th width="100px">Dt. Serviço</th>
                             <th width="100px">Valores</th>
@@ -25,6 +27,8 @@
                     <tbody>
                         @foreach ($registers as $data)
                             <tr>
+                                <td>{{ $data->user->fullname }}</td>
+                                <td>{{ $data->vehicle->plaque }}</td>
                                 <td>{{ $data->km }}</td>
                                 <td>{{ $data->dateservice }}</td>
                                 <td class="text-right">R$ {{ $data->values }}</td>
@@ -71,7 +75,7 @@
             cancelButtonText: 'No, cancel!',
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: 'btn btn-danger',
-            buttonsStyling: false,
+            buttonsStyling: true,
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

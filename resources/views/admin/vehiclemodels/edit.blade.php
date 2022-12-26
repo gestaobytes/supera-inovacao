@@ -1,30 +1,30 @@
 @extends('layouts.master')
 
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        <h1 class="font-bold mb-3 text-xl">ADICIONAR MANUTENÇÃO</h1>
+        <h1 class="font-bold mb-3 text-xl">EDITAR MODELO DE VEICULO</h1>
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('vehiclemodels.update', $registers->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('vehiclemodels.update', $vehiclemodels->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 pb-3">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" id="name" class="form-control" name="name" value="{{ $registers->name }}" placeholder="Nome">
+                                    <input type="text" id="name" class="form-control" name="name" value="{{ $vehiclemodels->name }}" placeholder="Nome">
                                     <label class="form-label">Nome</label>
                                 </div>
                                 @if ($errors->has('name'))
@@ -33,10 +33,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 pb-3">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" id="brand" class="form-control" name="brand" value="{{ $registers->brand }}" placeholder="Marca">
+                                    <input type="text" id="brand" class="form-control" name="brand" value="{{ $vehiclemodels->brand }}" placeholder="Marca">
                                     <label class="form-label">Marca</label>
                                 </div>
                                 @if ($errors->has('brand'))
@@ -46,10 +46,10 @@
                         </div>
 
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 pb-3">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" id="version" class="form-control" name="version" value="{{ $registers->version }}" placeholder="Versão">
+                                    <input type="text" id="version" class="form-control" name="version" value="{{ $vehiclemodels->version }}" placeholder="Versão">
                                     <label class="form-label">Versão</label>
                                 </div>
                                 @if ($errors->has('version'))

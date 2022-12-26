@@ -36,7 +36,7 @@ class VehicleRepository implements VehicleInterface
 
     public function create()
     {
-        $registers = Vehiclemodel::all();
+        $vehiclemodels = Vehiclemodel::all();
         return view('admin.vehicles.create', compact('vehiclemodels'));
     }
 
@@ -49,7 +49,7 @@ class VehicleRepository implements VehicleInterface
 
     public function edit($id)
     {
-        $registers = Vehiclemodel::all();
+        $vehiclemodels = Vehiclemodel::all();
         $vehicles = $this->model->where('id', $id)->first();
         return view('admin.vehicles.edit', compact('vehicles', 'vehiclemodels'));
     }

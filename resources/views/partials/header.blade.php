@@ -5,12 +5,14 @@
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 
                     <div class="flex flex-shrink-0 items-center">
-                        <img class="block h-10 w-auto lg:hidden"
+                        <a href="{{ route('maintenanceusers.index') }}">
+                            <img  class="block h-10 w-auto lg:hidden"
                             src="https://www.supera.com.br/wp-content/uploads/2020/11/nova-logo-supera-branca.svg"
                             alt="Desafio Supera">
-                        <img class="hidden h-10 w-auto lg:block"
+                            <img class="hidden h-10 w-auto lg:block"
                             src="https://www.supera.com.br/wp-content/uploads/2020/11/nova-logo-supera-branca.svg"
                             alt="Desafio Supera">
+                        </a>
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
@@ -40,6 +42,15 @@
                                 rounded-md
                                 text-sm
                                 font-medium">Manutenção</a>
+                                <a href="{{ route('users.index') }}"
+                                    class="text-gray-300
+                                hover:bg-gray-700
+                                hover:text-white
+                                px-3
+                                py-2
+                                rounded-md
+                                text-sm
+                                font-medium">Usuarios</a>
                             @endauth
                         </div>
                     </div>

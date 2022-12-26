@@ -2,57 +2,59 @@
 
 @section('content')
     <div class="container">
-        <div class="block-header">
-            <a class="btn btn-primary waves-effect" href="{{ route('vehicles.create') }}">
-                <i class="material-icons">add</i>
-                <span>Adicionar Nova Categoria</span>
-            </a>
+
+        <h1 class="font-bold mb-3 text-xl">VEICULOS</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="block-header">
+                    <a class="btn btn-primary waves-effect" href="{{ route('vehicles.create') }}">
+                        NOVO REGISTRO
+                    </a>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="70px">MODELOS DE VEICULOS</th>
+                            <th width="70px">PLACA</th>
+                            <th width="70px">COR</th>
+                            <th width="70px">FABRICAÇÃO</th>
+                            <th width="70px">ANO/MODELO</th>
+                            <th width="70px">CHASSI</th>
+                            <th width="70px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($vehicles as $data)
+                            <tr>
+                                <td>{{ $data->vehiclemodel->name }}</td>
+                                <td>{{ $data->plaque }}</td>
+                                <td>{{ $data->color }}</td>
+                                <td>{{ $data->manufacturing }}</td>
+                                <td>{{ $data->yearmodel }}</td>
+                                <td>{{ $data->chassi }}</td>
+                                <td class="text-right">
+                                    <a href="{{ route('vehicles.edit', $data->id) }}"
+                                        class="text-sm text-white bg-blue-400 rounded ml-2 p-1 px-2 hover:bg-blue-600">Editar
+                                    </a>
+                                    <a class="text-sm text-white bg-red-500 rounded ml-2 p-1 px-2 hover:bg-red-600 cursor-pointer"
+                                        onclick="deleteUser({{ $data->id }})">
+                                        Excluir
+                                    </a>
+                                    <form id="delete-form-{{ $data->id }}"
+                                        action="{{ route('vehicles.destroy', $data->id) }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{ $vehicles->links() }}
+            </div>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">MODELOS DE VEICULOS</th>
-                    <th scope="col">PLACA</th>
-                    <th scope="col">COR</th>
-                    <th scope="col">FABRICAÇÃO</th>
-                    <th scope="col">ANO/MODELO</th>
-                    <th scope="col">CHASSI</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($vehicles as $vehicle)
-                    <tr>
-                        <td>{{ $vehicle->id }}</td>
-                        <td>{{ $vehicle->vehiclemodel_id }}</td>
-                        <td>{{ $vehicle->plaque }}</td>
-                        <td>{{ $vehicle->color }}</td>
-                        <td>{{ $vehicle->manufacturing }}</td>
-                        <td>{{ $vehicle->yearmodel }}</td>
-                        <td>{{ $vehicle->chassi }}</td>
-                        <td class="text-center">
-                            <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="btn btn-info waves-effect">
-                                <i class="material-icons">edit</i>
-                            </a>
-                            <a href="{{ route('vehicles.show', $vehicle->id) }}" class="btn btn-info waves-effect">
-                                <i class="material-icons">show</i>
-                            </a>
-                            <button class="btn btn-danger waves-effect" type="button"
-                                onclick="deleteUser({{ $vehicle->id }})">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <form id="delete-form-{{ $vehicle->id }}"
-                                action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST"
-                                style="display: none;">
-                                @csrf
-                                @method('DELETE')
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
 @endsection
 
@@ -71,7 +73,7 @@
             cancelButtonText: 'No, cancel!',
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: 'btn btn-danger',
-            buttonsStyling: false,
+            buttonsStyling: true,
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
